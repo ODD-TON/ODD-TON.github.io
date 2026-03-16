@@ -1,62 +1,42 @@
-# Astro Starter Kit: Blog
+﻿# ODD-TON.github.io
 
-```sh
-npm create astro@latest -- --template blog
+ODD-TON 的个人主页与开发记录站点，使用 Astro 构建，并通过 GitHub Pages 自动发布。
+
+## 当前包含内容
+
+- 一个重新整理过的首页，用来介绍站点定位与当前更新重点
+- 博客归档页，用来收录项目记录、部署笔记和学习总结
+- 关于页，用来说明站点用途、技术栈和维护方式
+- GitHub Actions 工作流，用于自动部署到 GitHub Pages
+
+## 本地开发
+
+```bash
+npm install
+npm run dev
 ```
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+默认开发地址为 `http://localhost:4321`。
 
-Features:
+## 构建
 
-- ✅ Minimal styling (make it your own!)
-- ✅ 100/100 Lighthouse performance
-- ✅ SEO-friendly with canonical URLs and Open Graph data
-- ✅ Sitemap support
-- ✅ RSS Feed support
-- ✅ Markdown & MDX support
-
-## 🚀 Project Structure
-
-Inside of your Astro project, you'll see the following folders and files:
-
-```text
-├── public/
-├── src/
-│   ├── components/
-│   ├── content/
-│   ├── layouts/
-│   └── pages/
-├── astro.config.mjs
-├── README.md
-├── package.json
-└── tsconfig.json
+```bash
+npm run build
+npm run preview
 ```
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+构建产物会输出到 `dist/`。
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
+## GitHub Pages 部署
 
-The `src/content/` directory contains "collections" of related Markdown and MDX documents. Use `getCollection()` to retrieve posts from `src/content/blog/`, and type-check your frontmatter using an optional schema. See [Astro's Content Collections docs](https://docs.astro.build/en/guides/content-collections/) to learn more.
+仓库中已经包含工作流文件 `.github/workflows/deploy.yml`。
 
-Any static assets, like images, can be placed in the `public/` directory.
+如果这是这个仓库第一次启用 GitHub Pages，请确认仓库设置中的 Pages 已切换到 GitHub Actions。之后只要将变更推送到 `main` 分支，工作流就会自动构建并发布站点。
 
-## 🧞 Commands
+## 内容维护
 
-All commands are run from the root of the project, from a terminal:
+- 页面入口位于 `src/pages/`
+- 博客文章位于 `src/content/blog/`
+- 站点常量位于 `src/consts.ts`
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
-
-## 👀 Want to learn more?
-
-Check out [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
-
-## Credit
-
-This theme is based off of the lovely [Bear Blog](https://github.com/HermanMartinus/bearblog/).
+当前内容以中文为主，适合继续扩展为个人主页、项目展示页或开发日志站点。

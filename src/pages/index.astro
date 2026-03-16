@@ -1,49 +1,248 @@
----
+﻿---
+import { getCollection } from 'astro:content';
 import BaseHead from '../components/BaseHead.astro';
 import Footer from '../components/Footer.astro';
+import FormattedDate from '../components/FormattedDate.astro';
 import Header from '../components/Header.astro';
-import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
+import { SITE_DESCRIPTION, SITE_GITHUB_URL, SITE_TAGLINE, SITE_TITLE } from '../consts';
+
+const latestPosts = (await getCollection('blog'))
+	.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+	.slice(0, 3);
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang="zh-CN">
 	<head>
 		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
 	</head>
 	<body>
 		<Header />
 		<main>
-			<h1>🧑‍🚀 Ton's 浮生日记</h1>
-			<p>
-				Welcome to the official <a href="https://astro.build/">Astro</a> blog starter template. This template
-				serves as a lightweight, minimally-styled starting point for anyone looking to build a personal
-				website, blog, or portfolio with Astro.
-			</p>
-			<p>
-				This template comes with a few integrations already configured in your
-				<code>astro.config.mjs</code> file. You can customize your setup with
-				<a href="https://astro.build/integrations">Astro Integrations</a> to add tools like Tailwind,
-				React, or Vue to your project.
-			</p>
-			<p>Here are a few ideas on how to get started with the template:</p>
-			<ul>
-				<li>Edit this page in <code>src/pages/index.astro</code></li>
-				<li>Edit the site header items in <code>src/components/Header.astro</code></li>
-				<li>Add your name to the footer in <code>src/components/Footer.astro</code></li>
-				<li>Check out the included blog posts in <code>src/content/blog/</code></li>
-				<li>Customize the blog post page layout in <code>src/layouts/BlogPost.astro</code></li>
-			</ul>
-			<p>
-				Have fun! If you get stuck, remember to
-				<a href="https://docs.astro.build/">read the docs</a>
-				or <a href="https://astro.build/chat">join us on Discord</a> to ask questions.
-			</p>
-			<p>
-				Looking for a blog template with a bit more personality? Check out
-				<a href="https://github.com/Charca/astro-blog-template">astro-blog-template</a>
-				by <a href="https://twitter.com/Charca">Maxi Ferreira</a>.
-			</p>
+			<section class="hero">
+				<p class="eyebrow">GitHub Pages · Astro · Markdown</p>
+				<div class="hero-grid">
+					<div>
+						<h1>ODD-TON 的项目主页</h1>
+						<p class="lead">
+							这里是一个轻量、可持续更新的静态站点，用来整理项目进展、开发笔记和阶段性想法。
+							当前版本先把最必要的信息补齐，让首页能明确回答“这个站是做什么的”。
+						</p>
+						<div class="actions">
+							<a class="button-link primary" href="/blog">阅读博客</a>
+							<a class="button-link secondary" href={SITE_GITHUB_URL} target="_blank" rel="noreferrer">
+								查看仓库
+							</a>
+						</div>
+					</div>
+					<div class="hero-panel">
+						<p class="panel-title">站点摘要</p>
+						<ul>
+							<li><strong>定位</strong> 个人主页 + 开发记录</li>
+							<li><strong>内容</strong> 项目、部署、学习笔记</li>
+							<li><strong>发布</strong> GitHub Pages 自动部署</li>
+						</ul>
+						<p class="tagline">{SITE_TAGLINE}</p>
+					</div>
+				</div>
+			</section>
+
+			<section class="section-block">
+				<div class="section-heading">
+					<p class="eyebrow">What is here</p>
+					<h2>这个站点现在包含什么</h2>
+				</div>
+				<div class="info-grid">
+					<article>
+						<h3>项目记录</h3>
+						<p>把零散的想法和迭代过程整理成可回看的文章，减少“做过但找不到”的情况。</p>
+					</article>
+					<article>
+						<h3>技术归档</h3>
+						<p>优先记录能够复用的配置、踩坑和部署细节，让后续维护更轻松。</p>
+					</article>
+					<article>
+						<h3>持续更新</h3>
+						<p>结构保持简单，写一篇 Markdown 就能发布，适合长期维护而不需要复杂后台。</p>
+					</article>
+				</div>
+			</section>
+
+			<section class="section-block roadmap">
+				<div class="section-heading">
+					<p class="eyebrow">Roadmap</p>
+					<h2>当前补齐的重点</h2>
+				</div>
+				<ol>
+					<li>替换 Astro 模板默认文案，统一首页、博客、关于页的中文信息。</li>
+					<li>补上站点元信息、仓库链接和部署说明，减少“空白站点”的感觉。</li>
+					<li>接入 GitHub Actions，让后续只要 push 到主分支就能自动发布。</li>
+				</ol>
+			</section>
+
+			<section class="section-block latest-posts">
+				<div class="section-heading split">
+					<div>
+						<p class="eyebrow">Latest posts</p>
+						<h2>最近更新</h2>
+					</div>
+					<a href="/blog">查看全部文章</a>
+				</div>
+				<div class="post-grid">
+					{
+						latestPosts.map((post) => (
+							<article class="post-card">
+								<p class="post-date">
+									<FormattedDate date={post.data.pubDate} />
+								</p>
+								<h3>
+									<a href={`/blog/${post.id}/`}>{post.data.title}</a>
+								</h3>
+								<p>{post.data.description}</p>
+							</article>
+						))
+					}
+				</div>
+			</section>
 		</main>
 		<Footer />
 	</body>
 </html>
+
+<style>
+	.hero {
+		padding: 1.5rem 0 2rem;
+	}
+
+	.eyebrow {
+		margin: 0 0 0.85rem;
+		font-size: 0.84rem;
+		font-weight: 700;
+		letter-spacing: 0.12em;
+		text-transform: uppercase;
+		color: var(--accent);
+	}
+
+	.hero-grid {
+		display: grid;
+		grid-template-columns: minmax(0, 1.7fr) minmax(280px, 0.9fr);
+		gap: 1.5rem;
+		align-items: stretch;
+	}
+
+	.lead {
+		max-width: 42rem;
+		font-size: 1.08rem;
+		color: rgb(var(--gray-dark));
+	}
+
+	.actions {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.8rem;
+		margin-top: 1.5rem;
+	}
+
+	.hero-panel,
+	.info-grid article,
+	.post-card,
+	.roadmap ol {
+		border-radius: 24px;
+		background: rgba(255, 255, 255, 0.76);
+		border: 1px solid rgba(var(--gray-dark), 0.08);
+		box-shadow: var(--box-shadow);
+	}
+
+	.hero-panel {
+		padding: 1.35rem;
+		align-self: end;
+	}
+
+	.panel-title {
+		margin: 0 0 1rem;
+		font-size: 0.86rem;
+		font-weight: 700;
+		letter-spacing: 0.08em;
+		text-transform: uppercase;
+		color: rgb(var(--gray));
+	}
+
+	.hero-panel ul,
+	.roadmap ol {
+		margin: 0;
+		padding-left: 1.2rem;
+	}
+
+	.hero-panel li + li,
+	.roadmap li + li {
+		margin-top: 0.65rem;
+	}
+
+	.tagline {
+		margin: 1rem 0 0;
+		font-weight: 700;
+	}
+
+	.section-block + .section-block {
+		margin-top: 2rem;
+	}
+
+	.section-heading {
+		margin-bottom: 1rem;
+	}
+
+	.section-heading.split {
+		display: flex;
+		align-items: end;
+		justify-content: space-between;
+		gap: 1rem;
+	}
+
+	.info-grid,
+	.post-grid {
+		display: grid;
+		grid-template-columns: repeat(3, minmax(0, 1fr));
+		gap: 1rem;
+	}
+
+	.info-grid article,
+	.post-card {
+		padding: 1.35rem;
+	}
+
+	.roadmap ol {
+		padding: 1.35rem 1.35rem 1.35rem 2.6rem;
+	}
+
+	.post-date {
+		margin: 0 0 0.6rem;
+		font-size: 0.9rem;
+		color: rgb(var(--gray));
+	}
+
+	.post-card h3 {
+		margin-bottom: 0.45rem;
+	}
+
+	.post-card h3 a {
+		text-decoration: none;
+		color: rgb(var(--black));
+	}
+
+	.post-card h3 a:hover {
+		color: var(--accent);
+	}
+
+	@media (max-width: 900px) {
+		.hero-grid,
+		.info-grid,
+		.post-grid {
+			grid-template-columns: 1fr;
+		}
+
+		.section-heading.split {
+			align-items: start;
+			flex-direction: column;
+		}
+	}
+</style>

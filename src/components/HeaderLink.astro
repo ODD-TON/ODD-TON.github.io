@@ -1,4 +1,4 @@
----
+﻿---
 import type { HTMLAttributes } from 'astro/types';
 
 type Props = HTMLAttributes<'a'>;
@@ -15,10 +15,13 @@ const isActive = href === pathname || href === '/' + (subpath?.[0] || '');
 <style>
 	a {
 		display: inline-block;
+		border-radius: 999px;
+		font-weight: 600;
 		text-decoration: none;
 	}
+
 	a.active {
-		font-weight: bolder;
-		text-decoration: underline;
+		background: rgba(194, 65, 12, 0.1);
+		color: var(--accent);
 	}
 </style>
