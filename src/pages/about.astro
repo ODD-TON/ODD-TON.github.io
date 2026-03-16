@@ -2,7 +2,7 @@
 import BaseHead from '../components/BaseHead.astro';
 import Footer from '../components/Footer.astro';
 import Header from '../components/Header.astro';
-import { SITE_DESCRIPTION, SITE_GITHUB_URL, SITE_TITLE } from '../consts';
+import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
 ---
 
 <!doctype html>
@@ -14,50 +14,34 @@ import { SITE_DESCRIPTION, SITE_GITHUB_URL, SITE_TITLE } from '../consts';
 		<Header />
 		<main>
 			<section class="intro">
-				<p class="eyebrow">About</p>
-				<h1>关于这个站点</h1>
-				<p class="lead">
-					这个仓库原本是一个 Astro 默认博客模板。当前版本的目标不是一次性做得很满，
-					而是先把站点的身份、内容范围和维护方式说明清楚，让它能作为一个可靠的起点继续迭代。
+				<h1>关于</h1>
+				<p>
+					这是一个只用来放文章的简单博客。首页保留最基本的介绍，博客页负责归档文章，关于页用来说明内容和目录结构。
 				</p>
 			</section>
 
 			<section class="grid">
 				<article>
-					<h2>站点用途</h2>
-					<p>集中展示 ODD-TON 的公开项目、博客文章和一些适合长期保存的技术笔记。</p>
+					<h2>写作方式</h2>
+					<p>每篇文章都用 Markdown 写在仓库里，发布后会自动更新到站点。</p>
 				</article>
 				<article>
-					<h2>更新方式</h2>
-					<p>文章直接写在 <code>src/content/blog/</code>，页面由 Astro 构建，部署交给 GitHub Pages。</p>
+					<h2>内容范围</h2>
+					<p>这里只放正式文章，不再额外扩展项目页或其它展示内容。</p>
 				</article>
 				<article>
-					<h2>内容风格</h2>
-					<p>优先记录能复用、能回顾、能继续扩展的内容，而不是一次性的模板演示。</p>
+					<h2>图片附件</h2>
+					<p>文章里引用的图片或附件统一按文章 slug 分文件夹存放，后面维护会更清晰。</p>
 				</article>
 			</section>
 
-			<section class="details">
-				<div>
-					<p class="eyebrow">Stack</p>
-					<h2>技术选型</h2>
-					<ul>
-						<li>Astro 负责静态站点构建。</li>
-						<li>Markdown / MDX 负责内容编写。</li>
-						<li>GitHub Actions 负责自动构建与发布。</li>
-						<li>GitHub Pages 负责最终托管。</li>
-					</ul>
-				</div>
-				<div class="note-card">
-					<p class="eyebrow">Repository</p>
-					<h2>仓库与维护</h2>
-					<p>
-						如果你是从仓库直接进入这个项目，现在的结构已经适合继续扩展主页、博客和项目展示页。
-					</p>
-					<a class="button-link secondary" href={SITE_GITHUB_URL} target="_blank" rel="noreferrer">
-						打开 GitHub 仓库
-					</a>
-				</div>
+			<section class="structure">
+				<h2>文件结构</h2>
+				<ul>
+					<li><code>src/content/blog/</code>：存放所有博客文章。</li>
+					<li><code>public/blog-media/&lt;slug&gt;/</code>：存放对应文章的图片和附件。</li>
+					<li><code>src/assets/site/</code>：存放首页或站点公用图片。</li>
+				</ul>
 			</section>
 		</main>
 		<Footer />
@@ -66,57 +50,37 @@ import { SITE_DESCRIPTION, SITE_GITHUB_URL, SITE_TITLE } from '../consts';
 
 <style>
 	.intro {
-		max-width: 46rem;
-		padding-top: 1rem;
+		max-width: 42rem;
+		margin-bottom: 1.5rem;
 	}
 
-	.eyebrow {
-		margin: 0 0 0.8rem;
-		font-size: 0.84rem;
-		font-weight: 700;
-		letter-spacing: 0.12em;
-		text-transform: uppercase;
-		color: var(--accent);
-	}
-
-	.lead {
-		font-size: 1.08rem;
-	}
-
-	.grid,
-	.details {
+	.grid {
 		display: grid;
 		grid-template-columns: repeat(3, minmax(0, 1fr));
 		gap: 1rem;
-		margin-top: 2rem;
-	}
-
-	.details {
-		grid-template-columns: 1.25fr 0.95fr;
+		margin-bottom: 1.5rem;
 	}
 
 	article,
-	.note-card,
-	.details > div:first-child {
-		padding: 1.35rem;
+	.structure {
+		padding: 1.25rem;
 		border-radius: 24px;
-		background: rgba(255, 255, 255, 0.78);
+		background: rgba(255, 255, 255, 0.82);
 		border: 1px solid rgba(var(--gray-dark), 0.08);
 		box-shadow: var(--box-shadow);
 	}
 
-	ul {
+	.structure ul {
 		margin: 0;
 		padding-left: 1.25rem;
 	}
 
-	li + li {
+	.structure li + li {
 		margin-top: 0.6rem;
 	}
 
 	@media (max-width: 900px) {
-		.grid,
-		.details {
+		.grid {
 			grid-template-columns: 1fr;
 		}
 	}

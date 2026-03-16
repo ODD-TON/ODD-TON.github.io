@@ -5,6 +5,6 @@ import sitemap from '@astrojs/sitemap';
 import { defineConfig } from 'astro/config';
 
 export default defineConfig({
-	site: 'https://odd-ton.github.io',
+	site: 'https://oddton.link',
 	integrations: [mdx(), sitemap()],
 });
