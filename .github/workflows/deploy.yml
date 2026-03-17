@@ -22,6 +22,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      # 先配置 Pages，再上传构建产物。
       - name: Configure Pages
         uses: actions/configure-pages@v5
 
@@ -52,3 +53,4 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
+

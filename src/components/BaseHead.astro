@@ -10,8 +10,10 @@ interface Props {
 	image?: ImageMetadata;
 }
 
+// 规范链接会跟随 astro.config.mjs 里的站点域名生成。
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 
+// 没有单独封面图的页面会退回到这张默认图，保证社交分享信息完整。
 const { title, description, image = FallbackImage } = Astro.props;
 ---
 
@@ -48,3 +50,4 @@ const { title, description, image = FallbackImage } = Astro.props;
 <meta property="twitter:title" content={title} />
 <meta property="twitter:description" content={description} />
 <meta property="twitter:image" content={new URL(image.src, Astro.url)} />
+
