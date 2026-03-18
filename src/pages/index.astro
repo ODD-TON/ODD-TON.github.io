@@ -1,6 +1,5 @@
 ﻿---
-import { Image } from 'astro:assets';
-import HomeIllustration from '../assets/site/sample.jpg';
+const homeIllustration = '/site/home-user-image.svg';
 import BaseHead from '../components/BaseHead.astro';
 import Footer from '../components/Footer.astro';
 import Header from '../components/Header.astro';
@@ -17,13 +16,14 @@ import { SITE_BIO, SITE_DESCRIPTION, SITE_INTRO, SITE_TITLE } from '../consts';
 		<main>
 			<section class="home-card">
 				<div class="intro">
-					<p class="eyebrow">personal blog</p>
+					<p class="eyebrow">欢迎来到小Ton的主页</p>
 					<h1>{SITE_TITLE}</h1>
 					<p class="bio">{SITE_BIO}</p>
 					<p>{SITE_INTRO}</p>
+					<p class="note">希望这里能留住一些当下的心情，也让每次回来看时，都还能想起那一刻的光线和温度。</p>
 				</div>
 				<div class="artwork">
-					<Image src={HomeIllustration} width={720} height={540} alt={SITE_TITLE} />
+					<img src={homeIllustration} width="720" height="540" alt="一只在餐厅柜台后端着汉堡和饮料的狼角色插图" loading="eager" />
 				</div>
 			</section>
 		</main>
@@ -66,6 +66,11 @@ import { SITE_BIO, SITE_DESCRIPTION, SITE_INTRO, SITE_TITLE } from '../consts';
 		font-size: 1.15rem;
 		font-weight: 700;
 		color: rgb(var(--black));
+	}
+
+	.note {
+		margin-bottom: 0;
+		color: rgba(var(--gray-dark), 0.82);
 	}
 
 	.artwork img {
