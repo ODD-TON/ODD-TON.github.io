@@ -20,6 +20,7 @@ const posts = (await getCollection('blog')).sort(
 		<Header />
 		<main>
 			<section class="intro">
+				<p class="eyebrow">Archive</p>
 				<h1>博客</h1>
 				<p>这里会慢慢放上所有文章。页面保持简单，只按时间顺序整理内容。</p>
 			</section>
@@ -30,8 +31,10 @@ const posts = (await getCollection('blog')).sort(
 							<li>
 								<a href={`/blog/${post.id}/`}>
 									<p class="date"><FormattedDate date={post.data.pubDate} /></p>
-									<h2>{post.data.title}</h2>
-									<p>{post.data.description}</p>
+									<div class="content">
+										<h2>{post.data.title}</h2>
+										<p>{post.data.description}</p>
+									</div>
 								</a>
 							</li>
 						))
@@ -46,7 +49,21 @@ const posts = (await getCollection('blog')).sort(
 <style>
 	.intro {
 		max-width: 38rem;
-		margin-bottom: 1.5rem;
+		margin-bottom: 1.8rem;
+	}
+
+	.eyebrow {
+		display: inline-flex;
+		align-items: center;
+		margin: 0 0 0.8rem;
+		padding: 0.34rem 0.66rem;
+		border-radius: 999px;
+		background: rgba(178, 145, 110, 0.12);
+		font-size: 0.8rem;
+		font-weight: 700;
+		letter-spacing: 0.11em;
+		text-transform: uppercase;
+		color: var(--accent-dark);
 	}
 
 	.post-list {
@@ -58,18 +75,31 @@ const posts = (await getCollection('blog')).sort(
 	}
 
 	.post-list li a {
-		display: block;
-		padding: 1.2rem 1.25rem;
+		display: grid;
+		grid-template-columns: 180px minmax(0, 1fr);
+		gap: 1.2rem;
+		align-items: start;
+		padding: 1.3rem 1.35rem;
 		text-decoration: none;
-		border-radius: 24px;
-		background: rgba(255, 255, 255, 0.82);
-		border: 1px solid rgba(var(--gray-dark), 0.08);
+		border-radius: 26px;
+		background: var(--surface-strong);
+		border: 1px solid var(--line);
 		box-shadow: var(--box-shadow);
+		transition: transform 0.2s ease, border-color 0.2s ease;
+	}
+
+	.post-list li a:hover {
+		transform: translateY(-2px);
+		border-color: rgba(178, 145, 110, 0.28);
+	}
+
+	.content {
+		min-width: 0;
 	}
 
 	.post-list h2 {
-		margin-bottom: 0.35rem;
-		font-size: 1.55rem;
+		margin-bottom: 0.38rem;
+		font-size: 1.65rem;
 	}
 
 	.post-list p {
@@ -78,12 +108,21 @@ const posts = (await getCollection('blog')).sort(
 	}
 
 	.post-list .date {
-		margin-bottom: 0.55rem;
+		margin: 0;
+		padding-top: 0.2rem;
 		font-size: 0.92rem;
-		color: rgb(var(--gray));
+		font-weight: 700;
+		color: var(--accent-dark);
 	}
 
 	.post-list li a:hover h2 {
-		color: var(--accent);
+		color: var(--accent-dark);
+	}
+
+	@media (max-width: 720px) {
+		.post-list li a {
+			grid-template-columns: 1fr;
+			gap: 0.7rem;
+		}
 	}
 </style>

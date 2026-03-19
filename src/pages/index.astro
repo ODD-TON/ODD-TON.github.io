@@ -23,13 +23,16 @@ import { SITE_BIO, SITE_DESCRIPTION, SITE_INTRO, SITE_TITLE } from '../consts';
 					<p>{SITE_INTRO}</p>
 					<p class="note">希望这里能留住一些当下的心情 也让每次回来看时 都还能想起那一刻的光线和温度</p>
 				</div>
-				<div class="artwork">
-					<Image
-						src={HomeIllustration}
-						width={720}
-						height={540}
-						alt="一只在餐厅柜台后端着汉堡和饮料的狼角色插图"
-					/>
+				<div class="artwork-shell">
+					<div class="artwork-note">today's mood</div>
+					<div class="artwork">
+						<Image
+							src={HomeIllustration}
+							width={720}
+							height={540}
+							alt="一只在餐厅柜台后端着汉堡和饮料的狼角色插图"
+						/>
+					</div>
 				</div>
 			</section>
 		</main>
@@ -41,47 +44,105 @@ import { SITE_BIO, SITE_DESCRIPTION, SITE_INTRO, SITE_TITLE } from '../consts';
 	main {
 		display: flex;
 		align-items: center;
-		padding-top: 1.25rem;
-		padding-bottom: 0.5rem;
+		padding-top: 1.5rem;
+		padding-bottom: 0.8rem;
 	}
 
 	.home-card {
 		display: grid;
-		grid-template-columns: minmax(0, 1fr) minmax(280px, 460px);
-		gap: 2rem;
+		grid-template-columns: minmax(0, 1.18fr) minmax(300px, 0.82fr);
+		gap: 2.3rem;
 		align-items: center;
 		width: 100%;
-		padding: 1.25rem;
-		border-radius: 30px;
-		background: rgba(255, 255, 255, 0.78);
-		border: 1px solid rgba(var(--gray-dark), 0.08);
+		padding: 1.55rem;
+		border-radius: 34px;
+		background: var(--surface-strong);
+		border: 1px solid var(--line);
 		box-shadow: var(--box-shadow);
 	}
 
+	.intro {
+		max-width: 39rem;
+	}
+
 	.eyebrow {
-		margin: 0 0 0.8rem;
-		font-size: 0.84rem;
+		display: inline-flex;
+		align-items: center;
+		margin: 0 0 1rem;
+		padding: 0.36rem 0.7rem;
+		border-radius: 999px;
+		background: rgba(178, 145, 110, 0.12);
+		font-size: 0.8rem;
 		font-weight: 700;
-		letter-spacing: 0.12em;
+		letter-spacing: 0.11em;
 		text-transform: uppercase;
-		color: var(--accent);
+		color: var(--accent-dark);
+	}
+
+	h1 {
+		font-size: clamp(2.7rem, 5.6vw, 4.45rem);
+		line-height: 0.98;
+		white-space: nowrap;
 	}
 
 	.bio {
-		margin-bottom: 0.35rem;
-		font-size: 1.15rem;
+		margin-bottom: 0.55rem;
+		font-size: 1.18rem;
 		font-weight: 700;
 		color: rgb(var(--black));
 	}
 
 	.note {
+		max-width: 26rem;
 		margin-bottom: 0;
+		padding-top: 0.2rem;
 		color: rgba(var(--gray-dark), 0.82);
+	}
+
+	.artwork-shell {
+		position: relative;
+	}
+
+	.artwork-note {
+		position: absolute;
+		top: -0.8rem;
+		right: 1rem;
+		z-index: 1;
+		padding: 0.42rem 0.7rem;
+		border-radius: 999px;
+		background: rgba(255, 250, 244, 0.9);
+		border: 1px solid var(--line);
+		box-shadow: 0 10px 25px rgba(98, 79, 61, 0.08);
+		font-size: 0.78rem;
+		font-weight: 700;
+		letter-spacing: 0.08em;
+		text-transform: uppercase;
+		color: var(--accent-dark);
+	}
+
+	.artwork {
+		position: relative;
+		padding: 0.75rem;
+		border-radius: 30px;
+		background: linear-gradient(180deg, rgba(255, 255, 255, 0.65), rgba(242, 231, 220, 0.7));
+		border: 1px solid rgba(178, 145, 110, 0.22);
+	}
+
+	.artwork::before {
+		content: '';
+		position: absolute;
+		inset: 0.9rem 1rem auto auto;
+		width: 96px;
+		height: 96px;
+		border-radius: 50%;
+		background: radial-gradient(circle, rgba(178, 145, 110, 0.26), transparent 70%);
+		pointer-events: none;
 	}
 
 	.artwork img {
 		width: 100%;
-		box-shadow: var(--box-shadow);
+		border-radius: 24px;
+		box-shadow: 0 18px 40px rgba(70, 55, 42, 0.16);
 	}
 
 	@media (max-width: 900px) {
@@ -91,6 +152,17 @@ import { SITE_BIO, SITE_DESCRIPTION, SITE_INTRO, SITE_TITLE } from '../consts';
 
 		.home-card {
 			grid-template-columns: 1fr;
+			gap: 1.5rem;
+			padding: 1.15rem;
+		}
+
+		.intro {
+			max-width: none;
+		}
+
+		h1 {
+			white-space: normal;
+			font-size: clamp(2.7rem, 11vw, 4rem);
 		}
 	}
 </style>
