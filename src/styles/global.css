@@ -1,4 +1,4 @@
-﻿:root {
+:root {
 	--accent: #b2916e;
 	--accent-dark: #8d7154;
 	--accent-soft: #ebe1d6;
@@ -6,13 +6,14 @@
 	--surface: rgba(255, 255, 255, 0.7);
 	--surface-strong: rgba(255, 255, 255, 0.84);
 	--line: rgba(90, 73, 56, 0.12);
-	--black: 34, 28, 24;
-	--gray: 129, 116, 104;
-	--gray-light: 244, 236, 229;
-	--gray-dark: 74, 65, 59;
+	--black: #221c18;
+	--gray: #817468;
+	--gray-light: #f4ece5;
+	--gray-dark: #4a413b;
 	--gray-gradient: rgba(255, 248, 241, 0.96), rgba(255, 252, 248, 0.98);
 	--box-shadow: 0 18px 48px rgba(98, 79, 61, 0.12), 0 3px 12px rgba(34, 28, 24, 0.05);
 	--content-width: 980px;
+	--prose-width: 820px;
 }
 
 @font-face {
@@ -48,7 +49,7 @@ body {
 		linear-gradient(180deg, rgba(255, 255, 255, 0.45), rgba(255, 250, 244, 0.75)),
 		linear-gradient(var(--gray-gradient)) no-repeat;
 	background-attachment: fixed;
-	color: rgb(var(--gray-dark));
+	color: var(--gray-dark);
 	font-size: 18px;
 	line-height: 1.75;
 }
@@ -68,7 +69,7 @@ h5,
 h6 {
 	margin: 0 0 0.55rem 0;
 	font-family: 'Iowan Old Style', 'Palatino Linotype', 'Book Antiqua', Georgia, serif;
-	color: rgb(var(--black));
+	color: var(--black);
 	line-height: 1.08;
 	font-weight: 700;
 }
@@ -119,7 +120,7 @@ img {
 
 code {
 	padding: 0.18rem 0.4rem;
-	background-color: rgba(var(--gray-light), 0.95);
+	background-color: color-mix(in srgb, var(--gray-light) 95%, transparent);
 	border-radius: 8px;
 }
 
@@ -144,11 +145,26 @@ blockquote {
 
 hr {
 	border: none;
-	border-top: 1px solid rgba(var(--gray), 0.18);
+	border-top: 1px solid color-mix(in srgb, var(--gray) 18%, transparent);
 }
 
 ::selection {
 	background: rgba(178, 145, 110, 0.28);
+}
+
+/* 通用标签 badge，首页/博客/关于页共用 */
+.eyebrow {
+	display: inline-flex;
+	align-items: center;
+	margin: 0 0 0.8rem;
+	padding: 0.34rem 0.66rem;
+	border-radius: 999px;
+	background: rgba(178, 145, 110, 0.12);
+	font-size: 0.8rem;
+	font-weight: 700;
+	letter-spacing: 0.11em;
+	text-transform: uppercase;
+	color: var(--accent-dark);
 }
 
 @media (max-width: 720px) {

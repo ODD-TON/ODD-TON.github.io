@@ -1,9 +1,7 @@
-﻿---
-import { getCollection } from 'astro:content';
-import BaseHead from '../../components/BaseHead.astro';
-import Footer from '../../components/Footer.astro';
+---
+import PageLayout from '../../layouts/PageLayout.astro';
 import FormattedDate from '../../components/FormattedDate.astro';
-import Header from '../../components/Header.astro';
+import { getCollection } from 'astro:content';
 import { SITE_DESCRIPTION, SITE_TITLE } from '../../consts';
 
 const posts = (await getCollection('blog')).sort(
@@ -11,59 +9,35 @@ const posts = (await getCollection('blog')).sort(
 );
 ---
 
-<!doctype html>
-<html lang="zh-CN">
-	<head>
-		<BaseHead title={`${SITE_TITLE} | 博客`} description={SITE_DESCRIPTION} />
-	</head>
-	<body>
-		<Header />
-		<main>
-			<section class="intro">
-				<p class="eyebrow">Archive</p>
-				<h1>博客</h1>
-				<p>这里会慢慢放上所有文章。页面保持简单，只按时间顺序整理内容。</p>
-			</section>
-			<section>
-				<ul class="post-list">
-					{
-						posts.map((post) => (
-							<li>
-								<a href={`/blog/${post.id}/`}>
-									<p class="date"><FormattedDate date={post.data.pubDate} /></p>
-									<div class="content">
-										<h2>{post.data.title}</h2>
-										<p>{post.data.description}</p>
-									</div>
-								</a>
-							</li>
-						))
-					}
-				</ul>
-			</section>
-		</main>
-		<Footer />
-	</body>
-</html>
+<PageLayout title={`${SITE_TITLE} | 博客`} description={SITE_DESCRIPTION}>
+	<section class="intro">
+		<p class="eyebrow">Archive</p>
+		<h1>博客</h1>
+		<p>这里会慢慢放上所有文章。页面保持简单，只按时间顺序整理内容。</p>
+	</section>
+	<section>
+		<ul class="post-list">
+			{
+				posts.map((post) => (
+					<li>
+						<a href={`/blog/${post.id}/`}>
+							<p class="date"><FormattedDate date={post.data.pubDate} /></p>
+							<div class="content">
+								<h2>{post.data.title}</h2>
+								<p>{post.data.description}</p>
+							</div>
+						</a>
+					</li>
+				))
+			}
+		</ul>
+	</section>
+</PageLayout>
 
 <style>
 	.intro {
 		max-width: 38rem;
 		margin-bottom: 1.8rem;
-	}
-
-	.eyebrow {
-		display: inline-flex;
-		align-items: center;
-		margin: 0 0 0.8rem;
-		padding: 0.34rem 0.66rem;
-		border-radius: 999px;
-		background: rgba(178, 145, 110, 0.12);
-		font-size: 0.8rem;
-		font-weight: 700;
-		letter-spacing: 0.11em;
-		text-transform: uppercase;
-		color: var(--accent-dark);
 	}
 
 	.post-list {
@@ -104,7 +78,7 @@ const posts = (await getCollection('blog')).sort(
 
 	.post-list p {
 		margin: 0;
-		color: rgb(var(--gray-dark));
+		color: var(--gray-dark);
 	}
 
 	.post-list .date {

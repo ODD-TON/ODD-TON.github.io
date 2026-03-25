@@ -1,72 +1,46 @@
-﻿---
-import BaseHead from '../components/BaseHead.astro';
-import Footer from '../components/Footer.astro';
-import Header from '../components/Header.astro';
+---
+import PageLayout from '../layouts/PageLayout.astro';
 import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
 ---
 
-<!doctype html>
-<html lang="zh-CN">
-	<head>
-		<BaseHead title={`关于 ${SITE_TITLE}`} description={SITE_DESCRIPTION} />
-	</head>
-	<body>
-		<Header />
-		<main>
-			<section class="intro">
-				<p class="eyebrow">About</p>
-				<h1>关于</h1>
-				<p>
-					这是一个只用来放文章的简单博客。首页保留最基本的介绍，博客页负责归档文章，关于页用来说明内容和目录结构。
-				</p>
-			</section>
+<PageLayout title={`关于 ${SITE_TITLE}`} description={SITE_DESCRIPTION}>
+	<section class="intro">
+		<p class="eyebrow">About</p>
+		<h1>关于</h1>
+		<p>
+			这是一个只用来放文章的简单博客。首页保留最基本的介绍，博客页负责归档文章，关于页用来说明内容和目录结构。
+		</p>
+	</section>
 
-			<section class="grid">
-				<article>
-					<h2>写作方式</h2>
-					<p>每篇文章都用 Markdown 写在仓库里，发布后会自动更新到站点。</p>
-				</article>
-				<article>
-					<h2>内容范围</h2>
-					<p>这里只放正式文章，不再额外扩展项目页或其它展示内容。</p>
-				</article>
-				<article>
-					<h2>图片附件</h2>
-					<p>文章里引用的图片或附件统一按文章 slug 分文件夹存放，后面维护会更清晰。</p>
-				</article>
-			</section>
+	<section class="grid">
+		<article>
+			<h2>写作方式</h2>
+			<p>每篇文章都用 Markdown 写在仓库里，发布后会自动更新到站点。</p>
+		</article>
+		<article>
+			<h2>内容范围</h2>
+			<p>这里只放正式文章，不再额外扩展项目页或其它展示内容。</p>
+		</article>
+		<article>
+			<h2>图片附件</h2>
+			<p>文章里引用的图片或附件统一按文章 slug 分文件夹存放，后面维护会更清晰。</p>
+		</article>
+	</section>
 
-			<section class="structure">
-				<h2>文件结构</h2>
-				<ul>
-					<li><code>src/content/blog/</code>：存放所有博客文章。</li>
-					<li><code>public/blog-media/&lt;slug&gt;/</code>：存放对应文章的图片和附件。</li>
-					<li><code>src/assets/site/</code>：存放首页或站点公用图片。</li>
-				</ul>
-			</section>
-		</main>
-		<Footer />
-	</body>
-</html>
+	<section class="structure">
+		<h2>文件结构</h2>
+		<ul>
+			<li><code>src/content/blog/</code>：存放所有博客文章。</li>
+			<li><code>public/blog-media/&lt;slug&gt;/</code>：存放对应文章的图片和附件。</li>
+			<li><code>src/assets/site/</code>：存放首页或站点公用图片。</li>
+		</ul>
+	</section>
+</PageLayout>
 
 <style>
 	.intro {
 		max-width: 42rem;
 		margin-bottom: 1.8rem;
-	}
-
-	.eyebrow {
-		display: inline-flex;
-		align-items: center;
-		margin: 0 0 0.8rem;
-		padding: 0.34rem 0.66rem;
-		border-radius: 999px;
-		background: rgba(178, 145, 110, 0.12);
-		font-size: 0.8rem;
-		font-weight: 700;
-		letter-spacing: 0.11em;
-		text-transform: uppercase;
-		color: var(--accent-dark);
 	}
 
 	.grid {

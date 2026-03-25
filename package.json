@@ -1,7 +1,11 @@
 {
   "name": "ton-blog",
+  "description": "小Ton的个人博客，基于 Astro 构建，部署在 GitHub Pages。",
+  "author": "oddton",
+  "license": "MIT",
+  "homepage": "https://oddton.link",
   "type": "module",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "engines": {
     "node": ">=22.12.0"
   },

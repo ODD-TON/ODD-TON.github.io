@@ -1,47 +1,36 @@
-﻿---
+---
 import { Image } from 'astro:assets';
 import HomeIllustration from '../assets/site/mt.png';
-import BaseHead from '../components/BaseHead.astro';
-import Footer from '../components/Footer.astro';
-import Header from '../components/Header.astro';
+import PageLayout from '../layouts/PageLayout.astro';
 import { SITE_BIO, SITE_DESCRIPTION, SITE_INTRO, SITE_TITLE } from '../consts';
 ---
 
-<!doctype html>
-<html lang="zh-CN">
-	<head>
-		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
-	</head>
-	<body>
-		<Header />
-		<main>
-			<section class="home-card">
-				<div class="intro">
-					<p class="eyebrow">欢迎来到小Ton的主页</p>
-					<h1>{SITE_TITLE}</h1>
-					<p class="bio">{SITE_BIO}</p>
-					<p>{SITE_INTRO}</p>
-					<p class="note">希望这里能留住一些当下的心情 也让每次回来看时 都还能想起那一刻的光线和温度</p>
-				</div>
-				<div class="artwork-shell">
-					<div class="artwork-note">today's mood</div>
-					<div class="artwork">
-						<Image
-							src={HomeIllustration}
-							width={720}
-							height={540}
-							alt="一只在餐厅柜台后端着汉堡和饮料的狼角色插图"
-						/>
-					</div>
-				</div>
-			</section>
-		</main>
-		<Footer />
-	</body>
-</html>
+<PageLayout title={SITE_TITLE} description={SITE_DESCRIPTION}>
+	<section class="home-card">
+		<div class="intro">
+			<p class="eyebrow">欢迎来到小Ton的主页</p>
+			<h1>{SITE_TITLE}</h1>
+			<p class="bio">{SITE_BIO}</p>
+			<p>{SITE_INTRO}</p>
+			<p class="note">希望这里能留住一些当下的心情 也让每次回来看时 都还能想起那一刻的光线和温度</p>
+		</div>
+		<div class="artwork-shell">
+			<div class="artwork-note">today's mood</div>
+			<div class="artwork">
+				<Image
+					src={HomeIllustration}
+					width={720}
+					height={540}
+					alt="一只在餐厅柜台后端着汉堡和饮料的狼角色插图"
+				/>
+			</div>
+		</div>
+	</section>
+</PageLayout>
 
 <style>
-	main {
+	/* index.astro 的 main 需要垂直居中 */
+	:global(main) {
 		display: flex;
 		align-items: center;
 		padding-top: 1.5rem;
@@ -65,20 +54,6 @@ import { SITE_BIO, SITE_DESCRIPTION, SITE_INTRO, SITE_TITLE } from '../consts';
 		max-width: 39rem;
 	}
 
-	.eyebrow {
-		display: inline-flex;
-		align-items: center;
-		margin: 0 0 1rem;
-		padding: 0.36rem 0.7rem;
-		border-radius: 999px;
-		background: rgba(178, 145, 110, 0.12);
-		font-size: 0.8rem;
-		font-weight: 700;
-		letter-spacing: 0.11em;
-		text-transform: uppercase;
-		color: var(--accent-dark);
-	}
-
 	h1 {
 		font-size: clamp(2.7rem, 5.6vw, 4.45rem);
 		line-height: 0.98;
@@ -89,14 +64,14 @@ import { SITE_BIO, SITE_DESCRIPTION, SITE_INTRO, SITE_TITLE } from '../consts';
 		margin-bottom: 0.55rem;
 		font-size: 1.18rem;
 		font-weight: 700;
-		color: rgb(var(--black));
+		color: var(--black);
 	}
 
 	.note {
 		max-width: 26rem;
 		margin-bottom: 0;
 		padding-top: 0.2rem;
-		color: rgba(var(--gray-dark), 0.82);
+		color: color-mix(in srgb, var(--gray-dark) 82%, transparent);
 	}
 
 	.artwork-shell {
@@ -146,7 +121,7 @@ import { SITE_BIO, SITE_DESCRIPTION, SITE_INTRO, SITE_TITLE } from '../consts';
 	}
 
 	@media (max-width: 900px) {
-		main {
+		:global(main) {
 			align-items: stretch;
 		}
 
